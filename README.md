@@ -1,45 +1,90 @@
-# Anti Money Laundering Detection with Graph Attention Network
-This repo provides model training of Graph Attention Network in Anti Money Laundering Detection problem.  
-Dataset: https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml
+# Anti-Money Laundering Detection with Graph Attention Network (GAT)
+
+This repository provides an implementation of a Graph Attention Network (GAT) for detecting money laundering activities using transaction data. The model is trained on structured transaction data to identify suspicious activities.
+
+## Dataset
+
+We utilize the IBM Anti-Money Laundering dataset, which is available on Kaggle:\
+[IBM Transactions for Anti-Money Laundering](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml)
 
 ## Getting Started
-Main dependencies are NumPy, PyTorch, PyG and pandas
-Use the pip to install dependencies, you may use conda instead  
-For PyG installation, you may use below code to install 
+
+### Prerequisites
+
+Ensure you have the following dependencies installed:
+
+- Python 3.7+
+- NumPy
+- PyTorch
+- PyTorch Geometric (PyG)
+- pandas
+
+You can install the dependencies using `pip` or `conda`. To install PyG, use the following command:
+
 ```bash
 pip install torch_geometric
 ```
 
-## Usage
-Please create the corresponding folder before you run the script. 
-Put the .csv file into raw folder, [dataset.py](dataset.py) will create "processed" folder with processed data once you run the [train.py](train.py).  
-Make sure the directories are created as below:
+### Project Structure
+
+Ensure your project directory follows this structure:
 
 ```bash
 ├── data
-│   ├── raw
-├── dataset.py
-├── model.py
-└── train.py
+│   ├── raw          # Raw dataset files
+│   ├── processed    # Automatically created after preprocessing
+├── dataset.py       # Handles data loading and preprocessing
+├── model.py         # Defines the GAT model architecture
+├── train.py         # Trains the model
+├── anti-money-laundering-detection-with-gnn.ipynb  # Data analysis and visualization
 ```
 
-## Data analysis and visualization
-This [Jupyter Notebook](anti-money-laundering-detection-with-gnn.ipynb) explains the feature engineering implemented and short summary in this repo.  
-It also provides the data visualization and preprocessing pipeline, as well as dataset design details.
+## Data Analysis & Visualization
+
+The Jupyter Notebook [`anti-money-laundering-detection-with-gnn.ipynb`](anti-money-laundering-detection-with-gnn.ipynb) contains:
+
+- Exploratory Data Analysis (EDA)
+- Feature engineering techniques
+- Data visualization
+- Dataset design details
 
 ## Data Preprocessing
-All data preprocessing are done in [dataset.py](dataset.py), it used torch_geometric.data.InMemoryDataset as the dataset framework.  
-Please note that [dataset.py](dataset.py) currently support single file processing.
+
+All preprocessing is handled by [`dataset.py`](dataset.py), which utilizes `torch_geometric.data.InMemoryDataset` to process transaction records efficiently. Ensure the dataset is placed in the `data/raw` directory before running the script.
 
 ## Model Training
-Please change the path in line 8 to your local path, e.g. '/path/to/AntiMoneyLaunderingDetectionWithGNN/data'  
-The hyperparameters used in [train.py](train.py):  
-epoch = 100  
-train_batch_size = 256  
-test_batch_size = 256  
-learning_rate=0.0001  
-optimizer: SGD
+
+Modify line 8 in [`train.py`](train.py) to set the correct dataset path, e.g.,:
+
+```python
+DATA_PATH = '/path/to/AntiMoneyLaunderingDetectionWithGNN/data'
+```
+
+### Training Configuration
+
+The model is trained using the following hyperparameters:
+
+- **Epochs**: 100
+- **Train Batch Size**: 256
+- **Test Batch Size**: 256
+- **Learning Rate**: 0.0001
+- **Optimizer**: SGD
+
+To start training, run:
+
+```bash
+python train.py
+```
 
 ## Model Selection
-This repo is using Graph Attention Network as backbone model, the model can be changed in [model.py](model.py)
+
+The default model used is a **Graph Attention Network (GAT)**, defined in [`model.py`](model.py). You can modify this file to experiment with different Graph Neural Network (GNN) architectures.
+
+## Contributions
+
+Contributions are welcome! Feel free to submit issues or pull requests to improve this project.
+
+## License
+
+This project is licensed under the MIT License.
 
