@@ -1,9 +1,0 @@
-git init
-git add .
-git config --global user.email "ananthvipas@gmail.com"
-git config --global user.name "ananthvipas"
-git commit -am "initial commit"
-git remote add origin https://github.com/ananthvipas/aml_detection.git
-git remote -v
-git push origin master
-git push origin main
